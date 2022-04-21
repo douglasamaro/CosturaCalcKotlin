@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CosturaCalc</string>
+    <string name="calcular">calcular</string>
+
+    <string-array name="medidas">
+        <item>m2</item>
+        <item>cm</item>
+    </string-array>
+</resources>

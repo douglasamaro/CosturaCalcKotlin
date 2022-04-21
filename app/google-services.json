@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "23117153987",
+    "project_id": "costuracalc",
+    "storage_bucket": "costuracalc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23117153987:android:8a53442a196ae8ede68476",
+        "android_client_info": {
+          "package_name": "com.costcalc.calculadoradacostureira"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23117153987-9mdii6mnkh2i8maau8bnbmlc22mp0kk6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.costcalc.calculadoradacostureira",
+            "certificate_hash": "ef8c075f5b29eb6527b4f7abe37d1e9cabe59b4a"
+          }
+        },
+        {
+          "client_id": "23117153987-dks3194pmuqklhh3uvpl6b78hnjrae7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6orgmlm_j63AbTH6dZhbCL0zZc4JhM6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23117153987-dks3194pmuqklhh3uvpl6b78hnjrae7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
