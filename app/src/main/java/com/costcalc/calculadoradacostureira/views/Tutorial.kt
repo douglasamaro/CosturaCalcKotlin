@@ -12,15 +12,15 @@ import java.util.*
 
 class Tutorial : AppCompatActivity() {
 
-    var valorDaHoraFinal = 0.0 // se houver algum problema no banco de dados, o app irá assumir valor da hora = 0
-    var dias = 0 // se o usuário não checar nenhum checkbox, ele vai assumir = 0 | e vai pedir para o usuário selecionar ao menos 1
-    var msg: String? = null // String para o toast, ela assume um diferente valor mediante a condição que cair
+    var valorDaHoraFinal = 0.0
+    var dias = 0
+    var msg: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
 
-        Locale.setDefault(Locale("pt", "BR")) // para a formatação de numero em virgula
+        Locale.setDefault(Locale("pt", "BR"))
     }
 
     fun CalcSalv(view: View?) {

@@ -15,7 +15,6 @@ import java.util.*
 
 class Resultados : AppCompatActivity() {
 
-    // se acontecer algum problema ele assume como = 0
     var atempo : Double = 0.0
     var acomprado : Double = 0.0
     var apagou : Double = 0.0
@@ -24,26 +23,21 @@ class Resultados : AppCompatActivity() {
     var alucro : Double = 0.0
     var avalorHora : Double = 0.0
 
-    // val anuncio
     val adRequest = AdRequest.Builder().build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultados)
 
-        // Carregar anuncio banner
         MobileAds.initialize(this) {}
         adView.loadAd(adRequest)
 
-        // pegar o valor da hora do usuário no banco de dados
         val bancoDados: SQLiteDatabase = openOrCreateDatabase("DB_DADOS", MODE_PRIVATE, null)
         avalorHora = ReturnValorHora().RetunrUserValorHora(bancoDados)
 
-        // preparar para receber dados do array
         val b = this.intent.extras
         val dadosCalcArray = b?.getDoubleArray("dadosCalc")
 
-        // pegando os dados do array e substituindo as variáveis já inicializadas com 0
         atempo = dadosCalcArray!![0]
         apagou = dadosCalcArray[1]
         acomprado = dadosCalcArray[2]
@@ -51,7 +45,6 @@ class Resultados : AppCompatActivity() {
         aadicionais = dadosCalcArray[4]
         alucro = dadosCalcArray[5]
 
-        // Requisition of the result
         val countMain = CountMain(atempo, apagou, acomprado, ausado, aadicionais, alucro, avalorHora)
         val resultadoArray = countMain.Count()
         mtecido.text = resultadoArray[0]
@@ -60,7 +53,6 @@ class Resultados : AppCompatActivity() {
         madicionais.text = resultadoArray[3]
         mtotal.text = resultadoArray[4]
 
-        // Requisition of the function alternatives for %
         val lucroreturn = countMain.Alternative()
         val lucroCalc = LucroOptions(lucroreturn, alucro)
         val lucroArray = lucroCalc.LucroCalc()

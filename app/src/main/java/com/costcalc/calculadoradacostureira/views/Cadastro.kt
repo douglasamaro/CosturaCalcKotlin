@@ -25,7 +25,6 @@ class Cadastro : AppCompatActivity() {
 
     }
 
-    // inserir dados no banco de dados local
     fun Salvar(view: View?) {
 
         try {

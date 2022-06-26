@@ -9,7 +9,6 @@ import android.view.View
 import com.costcalc.calculadoradacostureira.R
 import com.costcalc.calculadoradacostureira.domain.ModelAlert
 import com.costcalc.calculadoradacostureira.views.fragment.ProdutoFragmentScreen
-import com.costcalc.calculadoradacostureira.views.fragment.ServicoFragmentScreen
 import com.costcalc.calculadoradacostureira.views.fragment.TecidoFragmentScreen
 import com.google.android.gms.ads.*
 import com.google.android.material.tabs.TabLayout
@@ -109,8 +108,8 @@ class MainActivity : AppCompatActivity() {
     private fun openStartAlert(corpo: ModelAlert) {
 
         alertBox.visibility = View.VISIBLE
-        alertTitulo.text = corpo.titulo
-        alertCorpo.text = corpo.corpo
+        alertTitulo.text = corpo.title
+        alertCorpo.text = corpo.body
         alertButtonActionText.text = corpo.buttonActionText
         alertButtonDimissText.text = corpo.buttonDimissText
         val url = corpo.buttonActionLink
