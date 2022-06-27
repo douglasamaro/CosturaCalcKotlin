@@ -1,4 +1,4 @@
-package com.example.roi
+package com.calcroi.roi
 
 import org.junit.Test
 

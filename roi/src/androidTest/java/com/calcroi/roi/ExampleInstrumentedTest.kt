@@ -1,4 +1,4 @@
-package com.example.roi
+package com.calcroi.roi
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

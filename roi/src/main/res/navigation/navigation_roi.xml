@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_roi"
+    app:startDestination="@id/roiStep0Fragment">
+
+    <fragment
+        android:id="@+id/roiStep0Fragment"
+        android:name="com.calcroi.roi.presentation.fragments.RoiStep0Fragment"
+        android:label="fragment_roi_step0"
+        tools:layout="@layout/fragment_roi_step0" >
+        <action
+            android:id="@+id/action_roiStep0Fragment_to_roiStep1Fragment"
+            app:destination="@id/roiStep1Fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/roiStep1Fragment"
+        android:name="com.calcroi.roi.presentation.fragments.RoiStep1Fragment"
+        android:label="fragment_roi_step1"
+        tools:layout="@layout/fragment_roi_step1" >
+        <action
+            android:id="@+id/action_roiStep1Fragment_to_roiStep2Fragment"
+            app:destination="@id/roiStep2Fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/roiStep2Fragment"
+        android:name="com.calcroi.roi.presentation.fragments.RoiStep2Fragment"
+        android:label="fragment_roi_step2"
+        tools:layout="@layout/fragment_roi_step2" >
+        <action
+            android:id="@+id/action_roiStep2Fragment_to_roiStep0Fragment"
+            app:destination="@id/roiStep0Fragment" />
+    </fragment>
+
+</navigation>

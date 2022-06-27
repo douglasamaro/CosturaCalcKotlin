@@ -1,42 +1,25 @@
 package com.costcalc.calculadoradacostureira.views.fragment
 
 import android.app.Activity
-import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteDatabase.openOrCreateDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.calcroi.roi.presentation.MainRoiActivity
 import com.costcalc.calculadoradacostureira.R
-import com.costcalc.calculadoradacostureira.data.sqlite.ReturnName
-import com.costcalc.calculadoradacostureira.data.sqlite.ReturnValorHora
-import com.costcalc.calculadoradacostureira.views.MainActivity
 import com.costcalc.calculadoradacostureira.views.Resultados
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.OnUserEarnedRewardListener
+import com.google.android.gms.ads.*
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import kotlinx.android.synthetic.main.calcular_produto.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.lang.Double.parseDouble
 
 class ProdutoFragmentScreen : Fragment() {
@@ -51,7 +34,8 @@ class ProdutoFragmentScreen : Fragment() {
 
     private var remoteConfig = FirebaseRemoteConfig.getInstance()
 
-    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         val view: View = inflater.inflate(R.layout.calcular_produto, container, false)
@@ -61,8 +45,13 @@ class ProdutoFragmentScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        CalcularCalc.setOnClickListener { view ->
-            Validations(view)
+        CalcularCalc.setOnClickListener {
+            //Validations(it)
+            startActivity(
+                Intent(
+                    requireContext() as Activity, MainRoiActivity::class.java
+                )
+            )
         }
         loadRewardedAd()
 
@@ -122,7 +111,8 @@ class ProdutoFragmentScreen : Fragment() {
             madicionais = adicionais.text.toString().toDouble()
         }
         val mlucro: Double = lucro.text.toString().toDouble()
-        val dadosCalc: DoubleArray = doubleArrayOf(mtempo, mpagou, mcomprado, musado, madicionais, mlucro)
+        val dadosCalc: DoubleArray =
+            doubleArrayOf(mtempo, mpagou, mcomprado, musado, madicionais, mlucro)
         val int = Intent(activity, Resultados::class.java)
         int.putExtra("dadosCalc", dadosCalc)
         activity?.startActivity(int)
@@ -138,39 +128,45 @@ class ProdutoFragmentScreen : Fragment() {
         } else {
             loadRewardedAd()
             Log.i(TAG, "The rewarded ad wasn't ready yet.")
-            Snackbar.make(view, "tivemos um problema na conexão, tente novamente daqui a 10 segundos",
-                Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                view, "tivemos um problema na conexão, tente novamente daqui a 10 segundos",
+                Snackbar.LENGTH_LONG
+            )
                 .show()
         }
     }
 
     fun loadRewardedAd() {
-        RewardedAd.load(requireContext() as Activity, AddId, adRequest, object : RewardedAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                adError.message.let { Log.i(TAG, it) }
-                mRewardedAd = null
-            }
+        RewardedAd.load(
+            requireContext() as Activity,
+            AddId,
+            adRequest,
+            object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError.message.let { Log.i(TAG, it) }
+                    mRewardedAd = null
+                }
 
-            override fun onAdLoaded(rewardedAd: RewardedAd) {
-                Log.i(TAG, "Ad was loaded.")
-                mRewardedAd = rewardedAd
-                mRewardedAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-                    override fun onAdShowedFullScreenContent() {
-                        // Called when ad is shown.
-                        Log.i(TAG, "Ad was shown.")
-                    }
+                override fun onAdLoaded(rewardedAd: RewardedAd) {
+                    Log.i(TAG, "Ad was loaded.")
+                    mRewardedAd = rewardedAd
+                    mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                        override fun onAdShowedFullScreenContent() {
+                            // Called when ad is shown.
+                            Log.i(TAG, "Ad was shown.")
+                        }
 
-                    override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                        Log.i(TAG, "Ad failed to show.")
-                    }
+                        override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                            Log.i(TAG, "Ad failed to show.")
+                        }
 
-                    override fun onAdDismissedFullScreenContent() {
-                        loadRewardedAd()
-                        Log.i(TAG, "Ad was dismissed.")
-                        mRewardedAd = null
+                        override fun onAdDismissedFullScreenContent() {
+                            loadRewardedAd()
+                            Log.i(TAG, "Ad was dismissed.")
+                            mRewardedAd = null
+                        }
                     }
                 }
-            }
-        })
+            })
     }
 }

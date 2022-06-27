@@ -67,6 +67,8 @@ dependencies {
 
     //gson
     implementation 'com.google.code.gson:gson:2.9.0'
+
+    implementation project(path: ':roi')
 }
 
 apply plugin: 'com.android.application'

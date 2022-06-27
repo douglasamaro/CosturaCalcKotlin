@@ -1,9 +1,10 @@
-package com.example.roi
+package com.calcroi.roi.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.calcroi.roi.R
 
-class MainActivity : AppCompatActivity() {
+class MainRoiActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
