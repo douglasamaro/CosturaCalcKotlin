@@ -2,15 +2,17 @@ package com.costcalc.calculadoradacostureira.views
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.calcroi.roi.presentation.MainRoiActivity
 import com.costcalc.calculadoradacostureira.R
 import com.costcalc.calculadoradacostureira.domain.ModelAlert
-import com.costcalc.calculadoradacostureira.views.fragment.ProdutoFragmentScreen
+import com.costcalc.calculadoradacostureira.views.fragment.ProductFragmentScreen
 import com.costcalc.calculadoradacostureira.views.fragment.TecidoFragmentScreen
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -37,11 +39,15 @@ class MainActivity : AppCompatActivity() {
 
         alertBox.visibility = View.GONE
 
+        goToRoi.setOnClickListener {
+            startActivity(Intent(this@MainActivity, MainRoiActivity::class.java))
+        }
+
         // Request Add
         MobileAds.initialize(this) {}
         adView.loadAd(adRequest)
 
-        showFragment1(ProdutoFragmentScreen())
+        showFragment1(ProductFragmentScreen())
         tab_tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
         override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -49,16 +55,13 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "Selected: " + tab?.text)
             when (tab?.text) {
                 "Produto" -> {
-                    showFragment1(ProdutoFragmentScreen())
+                    showFragment1(ProductFragmentScreen())
                 }
                 "Tecido" -> {
                     showFragment2(TecidoFragmentScreen())
                 }
-//                "Servico" -> {
-//                    showFragment3(ServicoFragmentScreen())
-//                }
                 else -> {
-                    showFragment1(ProdutoFragmentScreen())
+                    showFragment1(ProductFragmentScreen())
                 }
             }
         }
@@ -125,7 +128,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun showFragment1(fragment: ProdutoFragmentScreen){
+    fun showFragment1(fragment: ProductFragmentScreen){
         val fram = supportFragmentManager.beginTransaction()
         fram.replace(R.id.tab_viewpager, fragment)
         fram.commit()
